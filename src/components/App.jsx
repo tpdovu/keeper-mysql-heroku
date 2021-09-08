@@ -42,7 +42,7 @@ function App() {
     <div>
       <Header />
       <CreateArea onAdd={addNote} />
-      {notes.map((note, id) => {
+      {/* {notes.map((note, id) => {
         return (
           <Note
             key={id}
@@ -54,7 +54,7 @@ function App() {
             }}
           />
         );
-      })}
+      })} */}
       <Footer />
     </div>
   );
