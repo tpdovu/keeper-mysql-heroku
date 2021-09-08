@@ -8,13 +8,13 @@ import Axios from "axios";
 function App() {
   const [notes, setNotes] = useState([]);
 
-  useEffect(() => {
-    Axios.get("https://keeper-mysql-dovu.herokuapp.com/api/get").then(
-      (response) => {
-        setNotes(response.data);
-      }
-    );
-  }, [notes]);
+  // useEffect(() => {
+  //   Axios.get("https://keeper-mysql-dovu.herokuapp.com/api/get").then(
+  //     (response) => {
+  //       setNotes(response.data);
+  //     }
+  //   );
+  // }, [notes]);
 
   function addNote(newNote) {
     Axios.post("https://keeper-mysql-dovu.herokuapp.com/api/insert", {
