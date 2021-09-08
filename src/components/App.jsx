@@ -35,7 +35,6 @@ function App() {
     Axios.delete(
       `https://keeper-mysql-dovu.herokuapp.com/api/delete/${note.id}`
     );
-    console.log(note.id);
   }
 
   return (
