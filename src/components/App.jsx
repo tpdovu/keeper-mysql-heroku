@@ -15,7 +15,7 @@ function App() {
         // console.log(response.data);
       }
     );
-  }, []);
+  }, [notes]);
 
   function addNote(newNote) {
     Axios.post("https://keeper-mysql-dovu.herokuapp.com/api/insert", {
