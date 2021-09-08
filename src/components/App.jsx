@@ -11,8 +11,8 @@ function App() {
   useEffect(() => {
     Axios.get("https://keeper-mysql-dovu.herokuapp.com/api/get").then(
       (response) => {
-        // setNotes(response.data);
-        console.log(response.data);
+        setNotes(response.data);
+        // console.log(response.data);
       }
     );
   }, []);
