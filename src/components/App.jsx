@@ -8,13 +8,14 @@ import Axios from "axios";
 function App() {
   const [notes, setNotes] = useState([]);
 
-  // useEffect(() => {
-  //   Axios.get("https://keeper-mysql-dovu.herokuapp.com/api/get").then(
-  //     (response) => {
-  //       setNotes(response.data);
-  //     }
-  //   );
-  // }, [notes]);
+  useEffect(() => {
+    Axios.get("https://keeper-mysql-dovu.herokuapp.com/api/get").then(
+      (response) => {
+        // setNotes(response.data);
+        console.log(response.data);
+      }
+    );
+  }, []);
 
   function addNote(newNote) {
     Axios.post("https://keeper-mysql-dovu.herokuapp.com/api/insert", {
@@ -41,7 +42,7 @@ function App() {
     <div>
       <Header />
       <CreateArea onAdd={addNote} />
-      {notes.map((note, id) => {
+      {/* {notes.map((note, id) => {
         return (
           <Note
             key={id}
@@ -53,7 +54,7 @@ function App() {
             }}
           />
         );
-      })}
+      })} */}
       <Footer />
     </div>
   );
