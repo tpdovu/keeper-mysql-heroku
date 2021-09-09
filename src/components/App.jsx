@@ -9,13 +9,15 @@ function App() {
   const [notes, setNotes] = useState([]);
 
   useEffect(() => {
-    Axios.get("https://keeper-mysql-dovu.herokuapp.com/api/get").then(
-      (response) => {
-        setNotes(response.data);
-        // console.log(response.data);
-      }
+    getData();
+  }, []);
+
+  const getData = async () => {
+    const response = await Axios.get(
+      "https://keeper-mysql-dovu.herokuapp.com/api/get"
     );
-  }, [notes]);
+    setNotes(response.data);
+  };
 
   function addNote(newNote) {
     Axios.post("https://keeper-mysql-dovu.herokuapp.com/api/insert", {
@@ -36,6 +38,9 @@ function App() {
     Axios.delete(
       `https://keeper-mysql-dovu.herokuapp.com/api/delete/${note.id}`
     );
+
+    const del = notes.filter((currentNote) => currentNote.id !== note.id);
+    setNotes(del);
   }
 
   return (
