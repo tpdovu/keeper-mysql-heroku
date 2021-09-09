@@ -9,7 +9,7 @@ html {
 body {
   background: #eee;
   padding: 0 16px;
-  /* background-image: url("https://www.transparenttextures.com/patterns/classy-fabric.png"); */
+  background-image: url("https://www.transparenttextures.com/patterns/brushed-alum-dark.png");
 }
 
 header {
@@ -34,7 +34,7 @@ footer {
 }
 
 footer p {
-  color: #ccc;
+  color: rgba(14, 17, 37, 0.883);
 }
 .note {
   background: #fff;
@@ -44,6 +44,10 @@ footer p {
   width: 240px;
   margin: 16px;
   float: left;
+}
+
+.note:hover {
+  box-shadow: 0 4px 8px 0 rgba(0.2, 0.2, 0.2, 0.2);
 }
 .note h1 {
   font-size: 1.1em;
@@ -59,7 +63,6 @@ footer p {
 .note button {
   position: relative;
   float: right;
-  margin-right: 10px;
   color: #f5ba13;
   border: none;
   width: 36px;
@@ -67,6 +70,12 @@ footer p {
   cursor: pointer;
   outline: none;
   background-color: transparent;
+}
+
+.pin-button {
+  position: absolute;
+  width: 10px;
+  height: 10px;
 }
 
 form.create-note {
