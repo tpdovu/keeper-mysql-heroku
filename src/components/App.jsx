@@ -81,47 +81,49 @@ function App() {
   }
 
   return (
-    <Router>
-      <div className="application">
+    <div className="application">
+      <Router>
         <Header />
         <Switch>
           <Route path="/" exact component={Welcome}></Route>
           <Route path="/about" exact component={About}></Route>
-          <Route path="/notes">
-            <CreateArea onAdd={addNote} />
-            {notes.map((note, index) => {
-              return (
-                <Note
-                  key={index}
-                  id={note.id}
-                  title={note.title}
-                  content={note.content}
-                  onDelete={() => {
-                    deleteNote(note);
-                  }}
-                  editNote={() => {
-                    editNote(note);
-                  }}
-                />
-              );
-            })}
-            {editVisible ? (
-              <EditNote
-                title={currentNote.title}
-                content={currentNote.content}
-                onEdit={(note) => {
-                  updateNote(note);
-                }}
-                onCloseEditor={() => {
-                  setEditVisible(false);
-                }}
-              />
-            ) : null}
+          <Route path="/notes" component={NotesPage}>
+            {" "}
           </Route>
         </Switch>
-        <Footer />
-      </div>
-    </Router>
+      </Router>
+      <CreateArea onAdd={addNote} />
+      {notes.map((note, index) => {
+        return (
+          <Note
+            key={index}
+            id={note.id}
+            title={note.title}
+            content={note.content}
+            onDelete={() => {
+              deleteNote(note);
+            }}
+            editNote={() => {
+              editNote(note);
+            }}
+          />
+        );
+      })}
+      {editVisible ? (
+        <EditNote
+          title={currentNote.title}
+          content={currentNote.content}
+          onEdit={(note) => {
+            updateNote(note);
+          }}
+          onCloseEditor={() => {
+            setEditVisible(false);
+          }}
+        />
+      ) : null}
+
+      <Footer />
+    </div>
   );
 }
 
