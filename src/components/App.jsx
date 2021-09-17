@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import About from "./About";
 import Welcome from "./Welcome";
 import EditNote from "./EditNote";
+import NotesPage from "./NotesPage";
 
 function App() {
   const [notes, setNotes] = useState([]);
