@@ -88,9 +88,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={Welcome}></Route>
           <Route path="/about" exact component={About}></Route>
-          <Route path="/notes" component={NotesPage}>
-            {" "}
-          </Route>
+          <Route path="/notes" exact component={NotesPage}></Route>
         </Switch>
       </Router>
       <CreateArea onAdd={addNote} />
