@@ -1,21 +1,12 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
+import RoomIcon from "@material-ui/icons/Room";
+import RoomOutlinedIcon from "@material-ui/icons/RoomOutlined";
 
 function Note(props) {
   const [style, setStyle] = useState({ visibility: "hidden" });
-
-  //button hover/styling
-  const useStyles = makeStyles((theme) => ({
-    margin: {
-      margin: theme.spacing(1),
-    },
-    extendedIcon: {
-      marginRight: theme.spacing(1),
-    },
-  }));
-  const classes = useStyles();
+  const [pinned, setPinned] = useState(false);
 
   return (
     <div
@@ -26,29 +17,41 @@ function Note(props) {
       onMouseLeave={(event) => {
         setStyle({ visibility: "hidden" });
       }}
+      onClick={() => {
+        props.editNote();
+      }}
     >
-      <h1>{props.title}</h1>
-      <p>{props.content}</p>
+      <IconButton
+        aria-label="pin button"
+        className="pin-button"
+        onClick={(e) => {
+          e.stopPropagation();
+          setPinned(!pinned);
+        }}
+        style={!pinned ? style : null}
+      >
+        {!pinned ? (
+          <RoomOutlinedIcon fontSize="medium" />
+        ) : (
+          <RoomIcon fontSize="medium" />
+        )}
+      </IconButton>
+      <h1 className="title">{props.title}</h1>
+
+      <p className="content">{props.content}</p>
 
       <IconButton
         aria-label="delete"
-        // className={classes.margin}
-        onClick={() => {
+        // className={classes.margin} - default code for iconbutton
+        onClick={(e) => {
+          e.stopPropagation();
           props.onDelete();
         }}
         style={style}
+        className="delete-button"
       >
         <DeleteIcon fontSize="small" />
       </IconButton>
-
-      <div class="pin-button">
-        {/* <IconButton>
-          <button
-            class="fa-lg fas fa-thumbtack pin-button"
-            // style={style}
-          ></button>
-        </IconButton> */}
-      </div>
     </div>
   );
 }

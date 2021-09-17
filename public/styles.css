@@ -1,3 +1,7 @@
+:root {
+  --primary: #1f37be;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -13,7 +17,7 @@ body {
 }
 
 header {
-  background-color: #f5ba13;
+  background-color: var(--primary);
   margin: auto -16px;
   padding: 16px 32px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
@@ -25,6 +29,42 @@ header h1 {
   font-weight: 200;
 }
 
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.container {
+  margin: 20px;
+  text-align: center;
+}
+
+.container h2 {
+  font-size: 2em;
+}
+.container p {
+  margin-top: 20px;
+  font-size: 1.25em;
+}
+
+.nav-list {
+  list-style: none;
+  width: 100%;
+  display: flex;
+  justify-content: left;
+  margin: 0 50px 0 50px;
+}
+
+.nav-list li {
+  margin: 0 20px 0 20px;
+  text-decoration: none;
+  color: white;
+}
+
+Link {
+  text-decoration: none;
+}
 footer {
   position: absolute;
   text-align: center;
@@ -43,16 +83,23 @@ footer p {
   padding: 10px;
   width: 240px;
   margin: 16px;
-  float: left;
+  position: relative;
+  display: inline-block;
 }
 
 .note:hover {
   box-shadow: 0 4px 8px 0 rgba(0.2, 0.2, 0.2, 0.2);
 }
 .note h1 {
+  margin-top: 0;
   font-size: 1.1em;
   margin-bottom: 6px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  min-height: 40px;
+  padding-top: 10px;
 }
+
 .note p {
   font-size: 1.1em;
   margin-bottom: 10px;
@@ -60,10 +107,10 @@ footer p {
   word-wrap: break-word;
 }
 
-.note button {
+.note .delete-button {
   position: relative;
   float: right;
-  color: #f5ba13;
+  color: var(--primary);
   border: none;
   width: 36px;
   height: 36px;
@@ -72,10 +119,21 @@ footer p {
   background-color: transparent;
 }
 
-.pin-button {
-  position: absolute;
-  width: 10px;
-  height: 10px;
+.note img {
+  float: right;
+}
+
+.note .pin-button {
+  width: 20px;
+  height: 20px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background-color: transparent;
+  float: right;
+  margin-left: 2px;
 }
 
 form.create-note {
@@ -101,7 +159,7 @@ form.create-note button {
   position: absolute;
   right: 18px;
   bottom: -18px;
-  background: #f5ba13;
+  background: var(--primary);
   color: #fff;
   border: none;
   border-radius: 50%;
@@ -110,4 +168,67 @@ form.create-note button {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   outline: none;
+}
+
+form.edit-note {
+  position: relative;
+  width: 500px;
+  height: 200px;
+  margin: 30px auto 20px auto;
+  background: #fff;
+  padding: 15px;
+  border-radius: 7px;
+  box-shadow: 0 1px 5px rgb(138, 137, 137);
+}
+form.edit-note input,
+form.edit-note textarea {
+  width: 100%;
+  height: auto;
+  border: none;
+  padding: 4px;
+  outline: none;
+  font-size: 1.2em;
+  font-family: inherit;
+  resize: none;
+}
+button.update-btn {
+  position: absolute;
+  right: 18px;
+  bottom: -18px;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  outline: none;
+}
+
+button.close-btn {
+  position: absolute;
+  left: 18px;
+  bottom: -18px;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  outline: none;
+}
+
+.application {
+  border: red;
+}
+.edit-note-div {
+  z-index: 2;
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
