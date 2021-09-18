@@ -21,12 +21,14 @@ function NotesPage() {
   }, []);
 
   const getData = async () => {
-    const response = await Axios.get("http://localhost:5000/api/get");
+    const response = await Axios.get(
+      "https://trusting-visvesvaraya-317150.netlify.app/api/get"
+    );
     setNotes(response.data);
   };
 
   function addNote(newNote) {
-    Axios.post("http://localhost:5000/api/insert", {
+    Axios.post("https://trusting-visvesvaraya-317150.netlify.app/insert", {
       title: newNote.title,
       content: newNote.content,
     });
@@ -41,7 +43,7 @@ function NotesPage() {
   }
 
   function deleteNote(note) {
-    Axios.delete(`http://localhost:5000/api/delete/${note.id}`);
+    Axios.delete(`https://trusting-visvesvaraya-317150.netlify.app/${note.id}`);
     const del = notes.filter((currentNote) => currentNote.id !== note.id);
     setNotes(del);
   }
@@ -52,10 +54,13 @@ function NotesPage() {
   }
 
   function updateNote(e) {
-    Axios.put(`http://localhost:5000/api/update/${currentNote.id}`, {
-      title: e.title,
-      content: e.content,
-    });
+    Axios.put(
+      `https://trusting-visvesvaraya-317150.netlify.app/${currentNote.id}`,
+      {
+        title: e.title,
+        content: e.content,
+      }
+    );
 
     const newNote = {
       id: currentNote.id,
