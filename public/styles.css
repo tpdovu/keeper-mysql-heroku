@@ -37,15 +37,16 @@ nav {
 
 .container {
   margin: 20px;
-  text-align: center;
 }
 
 .container h2 {
   font-size: 2em;
+  text-align: center;
 }
 .container p {
   margin-top: 20px;
   font-size: 1.25em;
+  text-align: center;
 }
 
 .nav-list {
