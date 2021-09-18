@@ -28,7 +28,7 @@ function NotesPage() {
   };
 
   function addNote(newNote) {
-    Axios.post("https://keeper-mysql-dovu.herokuapp.com/insert", {
+    Axios.post("https://keeper-mysql-dovu.herokuapp.com/api/insert", {
       title: newNote.title,
       content: newNote.content,
     });
@@ -43,7 +43,7 @@ function NotesPage() {
   }
 
   function deleteNote(note) {
-    Axios.delete(`https://keeper-mysql-dovu.herokuapp.com/${note.id}`);
+    Axios.delete(`https://keeper-mysql-dovu.herokuapp.com/api/${note.id}`);
     const del = notes.filter((currentNote) => currentNote.id !== note.id);
     setNotes(del);
   }
@@ -54,7 +54,7 @@ function NotesPage() {
   }
 
   function updateNote(e) {
-    Axios.put(`https://keeper-mysql-dovu.herokuapp.com/${currentNote.id}`, {
+    Axios.put(`https://keeper-mysql-dovu.herokuapp.com/api/${currentNote.id}`, {
       title: e.title,
       content: e.content,
     });
