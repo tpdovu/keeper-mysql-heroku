@@ -22,13 +22,13 @@ function NotesPage() {
 
   const getData = async () => {
     const response = await Axios.get(
-      "https://trusting-visvesvaraya-317150.netlify.app/api/get"
+      "https://keeper-mysql-dovu.herokuapp.com/api/get"
     );
     setNotes(response.data);
   };
 
   function addNote(newNote) {
-    Axios.post("https://trusting-visvesvaraya-317150.netlify.app/insert", {
+    Axios.post("https://keeper-mysql-dovu.herokuapp.com/insert", {
       title: newNote.title,
       content: newNote.content,
     });
@@ -43,7 +43,7 @@ function NotesPage() {
   }
 
   function deleteNote(note) {
-    Axios.delete(`https://trusting-visvesvaraya-317150.netlify.app/${note.id}`);
+    Axios.delete(`https://keeper-mysql-dovu.herokuapp.com/${note.id}`);
     const del = notes.filter((currentNote) => currentNote.id !== note.id);
     setNotes(del);
   }
@@ -54,13 +54,10 @@ function NotesPage() {
   }
 
   function updateNote(e) {
-    Axios.put(
-      `https://trusting-visvesvaraya-317150.netlify.app/${currentNote.id}`,
-      {
-        title: e.title,
-        content: e.content,
-      }
-    );
+    Axios.put(`https://keeper-mysql-dovu.herokuapp.com/${currentNote.id}`, {
+      title: e.title,
+      content: e.content,
+    });
 
     const newNote = {
       id: currentNote.id,
