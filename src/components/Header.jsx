@@ -12,6 +12,9 @@ function Header() {
           <h1>Keeper</h1>
         </Link>
         <ul className="nav-list">
+          <Link to="/" style={style}>
+            <li>Home</li>
+          </Link>
           <Link to="/about" style={style}>
             <li>About</li>
           </Link>
