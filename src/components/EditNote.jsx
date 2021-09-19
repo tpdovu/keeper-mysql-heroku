@@ -37,6 +37,7 @@ function EditNote(props) {
     <div className="edit-note-div">
       <form className="edit-note">
         <input
+          className="edit-note-title"
           name="title"
           onChange={handleChange}
           value={note.title}
