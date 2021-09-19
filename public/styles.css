@@ -106,6 +106,7 @@ footer p {
   margin-bottom: 10px;
   white-space: pre-wrap;
   word-wrap: break-word;
+  text-align: left;
 }
 
 .note .delete-button {
@@ -192,34 +193,46 @@ form.edit-note textarea {
   font-family: inherit;
   resize: none;
 }
-button.update-btn {
+
+form.edit-note .edit-note-title {
+  font-weight: bold;
+}
+.update-btn {
   position: absolute;
-  right: 18px;
-  bottom: -18px;
-  background: var(--primary);
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  right: 10px;
+  bottom: -15px;
+  background-color: white;
+  color: var(--primary);
+  border: 3px solid var(--primary);
   cursor: pointer;
   outline: none;
+  padding: 3px;
+  border-radius: 16px;
+  font-weight: bold;
 }
 
-button.close-btn {
+.update-btn:hover {
+  color: white;
+  background-color: var(--primary);
+}
+
+.close-btn {
   position: absolute;
-  left: 18px;
-  bottom: -18px;
-  background: var(--primary);
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  left: 10px;
+  bottom: -15px;
+  background-color: white;
+  color: var(--primary);
+  border: 3px solid var(--primary);
   cursor: pointer;
   outline: none;
+  padding: 3px;
+  border-radius: 16px;
+  font-weight: bold;
+}
+
+.close-btn:hover {
+  color: white;
+  background-color: var(--primary);
 }
 
 .application {

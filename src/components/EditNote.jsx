@@ -53,10 +53,10 @@ function EditNote(props) {
           rows="5"
         />
         <button className="close-btn" onClick={hideNoteEdit}>
-          <DeleteIcon />
+          Cancel
         </button>
         <button className="update-btn" onClick={updateNote}>
-          <AddIcon />
+          Submit
         </button>
       </form>
     </div>
