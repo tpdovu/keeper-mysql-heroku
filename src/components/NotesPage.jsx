@@ -29,8 +29,6 @@ function NotesPage() {
     const retrievedNotes = response.data;
     setNotes(retrievedNotes);
 
-    console.log(retrievedNotes);
-
     let count = retrievedNotes.filter(
       (note) => note.isPinned === 1 || note.isPinned === true
     ).length;
@@ -68,6 +66,8 @@ function NotesPage() {
   }
 
   function updateNote(e) {
+    setEditVisible(false);
+
     Axios.put(
       `https://keeper-mysql-dovu.herokuapp.com/api/update/${currentNote.id}`,
       {
@@ -77,37 +77,42 @@ function NotesPage() {
       }
     );
 
-    const newNote = {
-      id: currentNote.id,
-      title: e.title,
-      content: e.content,
-      isPinned: e.isPinned,
-    };
-    const copyNotes = notes;
-    copyNotes[notes.findIndex((note) => note.id === currentNote.id)] = newNote;
-    setNotes(copyNotes);
-    setEditVisible(false);
+    // const newNote = {
+    //   id: currentNote.id,
+    //   title: e.title,
+    //   content: e.content,
+    //   isPinned: e.isPinned,
+    // };
+    // const copyNotes = notes;
+    // copyNotes[notes.findIndex((note) => note.id === currentNote.id)] = newNote;
+    // setNotes(copyNotes);
+
+    const noteIndex = notes.findIndex((note) => note.id === currentNote.id);
+
+    notes[noteIndex].title = e.title;
+    notes[noteIndex].content = e.content;
   }
 
   function togglePin(note) {
     Axios.put(
       `https://keeper-mysql-dovu.herokuapp.com/api/togglePin/${note.id}`
     );
-
     const noteIndex = notes.findIndex(
       (currentNote) => currentNote.id === note.id
     );
-
     notes[noteIndex].isPinned = !notes[noteIndex].isPinned;
-
     if (notes[noteIndex].isPinned === true || notes[noteIndex.isPinned === 1]) {
       setNumPinned(numPinned + 1);
     } else {
       setNumPinned(numPinned - 1);
     }
-
-    console.log(notes);
   }
+
+  const getPinnedNotes = () => {
+    return notes.filter(
+      (note) => note.isPinned === true || note.isPinned === 1
+    );
+  };
 
   return (
     <div className="container">
@@ -117,28 +122,26 @@ function NotesPage() {
       {/* pinned notes here - dynamic pinned/unpinned headers not working */}
       {/* {numPinned !== 0 ? <h3>Pinned</h3> : null} */}
       {notes.length !== 0 ? <h3>Pinned</h3> : null}
-      {notes
-        .filter((note) => note.isPinned === true || note.isPinned === 1)
-        .map((note, index) => {
-          return (
-            <Note
-              key={index}
-              id={note.id}
-              title={note.title}
-              content={note.content}
-              isPinned={note.isPinned}
-              onDelete={() => {
-                deleteNote(note);
-              }}
-              editNote={() => {
-                editNote(note);
-              }}
-              setPinned={(e) => {
-                togglePin(note);
-              }}
-            />
-          );
-        })}
+      {getPinnedNotes().map((note, index) => {
+        return (
+          <Note
+            key={index}
+            id={note.id}
+            title={note.title}
+            content={note.content}
+            isPinned={note.isPinned}
+            onDelete={() => {
+              deleteNote(note);
+            }}
+            editNote={() => {
+              editNote(note);
+            }}
+            setPinned={(e) => {
+              togglePin(note);
+            }}
+          />
+        );
+      })}
       {/* unpinned note here */}
       {/* {numPinned !== 0 && notes.length !== numPinned ? <h3>Unpinned</h3> : null} */}
       {notes.length !== 0 ? <h3>Unpinned</h3> : null}
