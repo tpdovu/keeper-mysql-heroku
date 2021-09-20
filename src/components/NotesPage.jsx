@@ -103,6 +103,8 @@ function NotesPage() {
     } else {
       setNumPinned(numPinned - 1);
     }
+
+    console.log(notes);
   }
 
   return (
