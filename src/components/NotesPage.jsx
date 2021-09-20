@@ -29,6 +29,8 @@ function NotesPage() {
     const retrievedNotes = response.data;
     setNotes(retrievedNotes);
 
+    console.log(retrievedNotes);
+
     let count = retrievedNotes.filter(
       (note) => note.isPinned === 1 || note.isPinned === true
     ).length;

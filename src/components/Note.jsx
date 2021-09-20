@@ -6,7 +6,7 @@ import RoomOutlinedIcon from "@material-ui/icons/RoomOutlined";
 
 function Note(props) {
   const [style, setStyle] = useState({ visibility: "hidden" });
-  const [pinned, setPinned] = useState(false);
+  const [pinned, setPinned] = useState(props.isPinned);
 
   return (
     <div
@@ -27,6 +27,7 @@ function Note(props) {
         onClick={(e) => {
           e.stopPropagation();
           setPinned(!pinned);
+          props.setPinned();
         }}
         style={!pinned ? style : null}
       >
