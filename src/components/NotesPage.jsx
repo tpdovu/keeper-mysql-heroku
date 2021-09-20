@@ -5,10 +5,12 @@ import CreateArea from "./CreateArea";
 import Axios from "axios";
 
 import EditNote from "./EditNote";
+//API server URL: https://keeper-mysql-dovu.herokuapp.com/
 
 function NotesPage() {
   const [notes, setNotes] = useState([]);
   const [editVisible, setEditVisible] = useState(false);
+  const [numPinned, setNumPinned] = useState(0);
   const [currentNote, setCurrentNote] = useState({
     id: "",
     title: "",
@@ -24,13 +26,20 @@ function NotesPage() {
     const response = await Axios.get(
       "https://keeper-mysql-dovu.herokuapp.com/api/get"
     );
-    setNotes(response.data);
+    const retrievedNotes = response.data;
+    setNotes(retrievedNotes);
+
+    let count = retrievedNotes.filter(
+      (note) => note.isPinned === 1 || note.isPinned === true
+    ).length;
+    setNumPinned(count);
   };
 
   function addNote(newNote) {
     Axios.post("https://keeper-mysql-dovu.herokuapp.com/api/insert", {
       title: newNote.title,
       content: newNote.content,
+      isPinned: false,
     });
 
     setNotes([
@@ -38,6 +47,7 @@ function NotesPage() {
       {
         title: newNote.title,
         content: newNote.content,
+        isPinned: false,
       },
     ]);
   }
@@ -61,6 +71,7 @@ function NotesPage() {
       {
         title: e.title,
         content: e.content,
+        isPinned: e.isPinned,
       }
     );
 
@@ -68,33 +79,87 @@ function NotesPage() {
       id: currentNote.id,
       title: e.title,
       content: e.content,
+      isPinned: e.isPinned,
     };
     const copyNotes = notes;
     copyNotes[notes.findIndex((note) => note.id === currentNote.id)] = newNote;
     setNotes(copyNotes);
     setEditVisible(false);
   }
+
+  function togglePin(note) {
+    Axios.put(
+      `https://keeper-mysql-dovu.herokuapp.com/api/togglePin/${note.id}`
+    );
+
+    const noteIndex = notes.findIndex(
+      (currentNote) => currentNote.id === note.id
+    );
+
+    notes[noteIndex].isPinned = !notes[noteIndex].isPinned;
+
+    if (notes[noteIndex].isPinned === true || notes[noteIndex.isPinned === 1]) {
+      setNumPinned(numPinned + 1);
+    } else {
+      setNumPinned(numPinned - 1);
+    }
+  }
+
   return (
     <div className="container">
       <h2>Notes</h2>
       <p>Create, read update and delete notes here!</p>
       <CreateArea onAdd={addNote} />
-      {notes.map((note, index) => {
-        return (
-          <Note
-            key={index}
-            id={note.id}
-            title={note.title}
-            content={note.content}
-            onDelete={() => {
-              deleteNote(note);
-            }}
-            editNote={() => {
-              editNote(note);
-            }}
-          />
-        );
-      })}
+      {/* pinned notes here - dynamic pinned/unpinned headers not working */}
+      {/* {numPinned !== 0 ? <h3>Pinned</h3> : null} */}
+      {notes.length !== 0 ? <h3>Pinned</h3> : null}
+      {notes
+        .filter((note) => note.isPinned === true || note.isPinned === 1)
+        .map((note, index) => {
+          return (
+            <Note
+              key={index}
+              id={note.id}
+              title={note.title}
+              content={note.content}
+              isPinned={note.isPinned}
+              onDelete={() => {
+                deleteNote(note);
+              }}
+              editNote={() => {
+                editNote(note);
+              }}
+              setPinned={(e) => {
+                togglePin(note);
+              }}
+            />
+          );
+        })}
+      {/* unpinned note here */}
+      {/* {numPinned !== 0 && notes.length !== numPinned ? <h3>Unpinned</h3> : null} */}
+      {notes.length !== 0 ? <h3>Unpinned</h3> : null}
+      {notes
+        .filter((note) => note.isPinned === false || note.isPinned === 0)
+        .map((note, index) => {
+          return (
+            <Note
+              key={index}
+              id={note.id}
+              title={note.title}
+              content={note.content}
+              isPinned={note.isPinned}
+              onDelete={() => {
+                deleteNote(note);
+              }}
+              editNote={() => {
+                editNote(note);
+              }}
+              setPinned={(e) => {
+                togglePin(note);
+              }}
+            />
+          );
+        })}
       {editVisible ? (
         <EditNote
           title={currentNote.title}
